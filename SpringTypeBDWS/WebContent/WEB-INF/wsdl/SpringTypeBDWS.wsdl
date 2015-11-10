@@ -1,0 +1,92 @@
+<wsdl:definitions
+     name="SpringTypeBDWS"
+     targetNamespace="http://ubicuo.com.pe/eai/ebs/services/SpringTypeBDWS/ws"
+     xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://ubicuo.com.pe/eai/ebs/services/SpringTypeBDWS/ws"
+     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:types="http://ubicuo.com.pe/eai/ebs/services/SpringTypeBDWS/types"
+     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+    >
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://ubicuo.com.pe/eai/ebs/services/SpringTypeBDWS/ws" elementFormDefault="qualified"/>
+        <xsd:schema>
+            <xsd:import schemaLocation="schemaWS.xsd" namespace="http://ubicuo.com.pe/eai/ebs/services/SpringTypeBDWS/types"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="InsertarPersonaRequestMsg">
+        <wsdl:part name="request" element="types:InsertarPersonaRequest"/>
+    </wsdl:message>
+    <wsdl:message name="InsertarPersonaResponseMsg">
+        <wsdl:part name="response" element="types:InsertarPersonaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ConsultarPersonaRequestMsg">
+        <wsdl:part name="request" element="types:ConsultarPersonaRequest"/>
+    </wsdl:message>
+    <wsdl:message name="ConsultarPersonaResponseMsg">
+        <wsdl:part name="response" element="types:ConsultarPersonaResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="SpringTypeBDWSPortType">
+        <wsdl:operation name="insertarPersona">
+            <wsdl:input message="tns:InsertarPersonaRequestMsg"/>
+            <wsdl:output message="tns:InsertarPersonaResponseMsg"/>
+        </wsdl:operation>
+        <wsdl:operation name="consultarPersona">
+            <wsdl:input message="tns:ConsultarPersonaRequestMsg"/>
+            <wsdl:output message="tns:ConsultarPersonaResponseMsg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SpringTypeBDWSPortTypeSOAP12Binding" type="tns:SpringTypeBDWSPortType">
+        <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="insertarPersona">
+            <soap12:operation style="document" soapAction="http://ubicuo.com.pe/eai/ebs/services/SpringTypeBDWS/insertarPersona"/>
+            <wsdl:input>
+                <soap12:body use="literal" parts="request"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal" parts="response"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="consultarPersona">
+            <soap12:operation style="document" soapAction="http://ubicuo.com.pe/eai/ebs/services/SpringTypeBDWS/consultarPersona"/>
+            <wsdl:input>
+                <soap12:body use="literal" parts="request"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal" parts="response"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="SpringTypeBDWSPortTypeSOAP11Binding" type="tns:SpringTypeBDWSPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="insertarPersona">
+            <soap:operation style="document" soapAction="http://ubicuo.com.pe/eai/ebs/services/SpringTypeBDWS/insertarPersona"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="request"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="response"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="consultarPersona">
+            <soap:operation style="document" soapAction="http://ubicuo.com.pe/eai/ebs/services/SpringTypeBDWS/consultarPersona"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="request"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="response"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SpringTypeBDWSWSService">
+        <wsdl:port name="SpringTypeBDWSPort11SB" binding="tns:SpringTypeBDWSPortTypeSOAP11Binding">
+            <soap:address location="http://localhost:7012/SpringTypeBDWS/ebsSpringTypeBDWSSB11?wsdl"/>
+        </wsdl:port>
+        <wsdl:port name="SpringTypeBDWSPort12SB" binding="tns:SpringTypeBDWSPortTypeSOAP12Binding">
+            <soap12:address location="http://localhost:7012/SpringTypeBDWS/bsSpringTypeBDWSSB12?wsdl"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

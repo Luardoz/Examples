@@ -1,0 +1,60 @@
+<xsd:schema targetNamespace="http://ubicuo.com.pe/eai/ebs/services/SpringTypeBDWS/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns="http://ubicuo.com.pe/eai/ebs/services/SpringTypeBDWS/types" elementFormDefault="qualified">
+    <xsd:include schemaLocation="baseSchema.xsd"/>
+    
+    <xsd:complexType name="listaPersonaType">
+        <xsd:sequence>
+            <xsd:element name="persona" maxOccurs="unbounded" minOccurs="1">
+			    <xsd:complexType>
+			        <xsd:sequence>
+			            <xsd:element name="idpersona" type="xsd:string"/>
+			            <xsd:element name="nombre" type="xsd:string"/>
+			            <xsd:element name="apellido" type="xsd:string"/>
+			            <xsd:element name="fechaNacimiento" type="xsd:string"/>
+			            <xsd:element name="telefono" type="xsd:string"/>
+			            <xsd:element name="email" type="xsd:string"/>
+			            <xsd:element name="estadoCivil" type="xsd:string"/>
+			            <xsd:element name="sexo" type="xsd:string"/>
+			        </xsd:sequence>
+			    </xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+    
+    <xsd:element name="InsertarPersonaRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="parametrosAuditRequest" type="parametrosAuditRequestType"/>
+                <xsd:element name="listaPersona" type="listaPersonaType"/>                                              
+                <xsd:element name="listaRequestOpcional" type="listaParametrosType"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="InsertarPersonaResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="parametrosAuditResponse" type="parametrosAuditResponseType"/>
+                <xsd:element name="fechaOperacion" type="xsd:string"/>                         
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    <xsd:element name="ConsultarPersonaRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="parametrosAuditRequest" type="parametrosAuditRequestType"/>                               
+                <xsd:element name="listaRequestOpcional" type="listaParametrosType"/>
+            </xsd:sequence>
+    	</xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ConsultarPersonaResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="parametrosAuditResponse" type="parametrosAuditResponseType"/>
+                <xsd:element name="fechaOperacion" type="xsd:string"/>
+                <xsd:element name="listaPersona" type="listaPersonaType"/>                              
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+</xsd:schema>
