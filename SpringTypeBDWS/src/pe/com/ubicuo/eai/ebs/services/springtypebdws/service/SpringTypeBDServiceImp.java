@@ -1,6 +1,7 @@
 package pe.com.ubicuo.eai.ebs.services.springtypebdws.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,59 +78,6 @@ public class SpringTypeBDServiceImp implements SpringTypeBDService {
 		return response;
 	}
 
-//	@Override
-//	public ConsultarPersonaResponse consultarPersona(ConsultarPersonaRequest request) {
-//		
-//		String cadenaTrazabilidad = "[consultarPersona]";
-//		long timeStart = System.currentTimeMillis();
-//		logger.info(cadenaTrazabilidad + "<<---------------- Inicio metodo consultarPersona ---------------->>");
-//		logger.info(cadenaTrazabilidad + "Input Servicio:\n" + JAXBUtil.anyObjectToXmlText(request));
-//		
-//		ConsultarPersonaResponse response = new ConsultarPersonaResponse();
-//		response.setParametrosAuditResponse(new ParametrosAuditResponseType());			
-//		response.getParametrosAuditResponse().setIdTransaccion(request.getParametrosAuditRequest().getIdTransaccion());
-//		try{
-//			ListaPersonaType personas = new ListaPersonaType();
-//			List<PersonaBean> personasList = testDBDao.consultarPersonas(cadenaTrazabilidad);
-//			
-//			if(null != personasList && personasList.size()>0){
-//				for(PersonaBean personaBean: personasList){
-//					Persona persona = new Persona();
-//					persona.setApellido(personaBean.getApellido());
-//					persona.setEmail(personaBean.getEmail());
-//					persona.setEstadoCivil(personaBean.getEstadoCivil());
-//					persona.setFechaNacimiento(personaBean.getFechaNac().toString());
-//					persona.setIdpersona(personaBean.getIdpersona()+"");
-//					persona.setNombre(personaBean.getNombre());
-//					persona.setSexo(personaBean.getSexo());
-//					persona.setTelefono(personaBean.getTelefono());
-//					
-//					personas.getPersona().add(persona);
-//				}
-//				
-//				response.setListaPersona(personas);	
-//				response.getParametrosAuditResponse().setCodigoRespuesta("0");
-//				response.getParametrosAuditResponse().setMensajeRespuesta("Operación exitosa");
-//				response.setFechaOperacion(new Date().toString());
-//			}else{				
-//				response.getParametrosAuditResponse().setCodigoRespuesta("1");
-//				response.getParametrosAuditResponse().setMensajeRespuesta("No hay personas en la BD");
-//				response.setFechaOperacion(new Date().toString());										
-//			}
-//					
-//			
-//		}catch(Exception e){
-//			logger.error(cadenaTrazabilidad + "Error: " + e.getMessage(), e);
-//		}catch(Throwable e){
-//			logger.error(cadenaTrazabilidad + "Error: " + e.getMessage(), e);
-//		}finally{
-//			logger.info(cadenaTrazabilidad + "Output Servicio:\n" + JAXBUtil.anyObjectToXmlText(response));
-//			logger.info(cadenaTrazabilidad + "Tiempo total transcurrido(ms): " + (System.currentTimeMillis() - timeStart));
-//			logger.info(cadenaTrazabilidad + "<<---------------- Fin metodo consultarPersona ---------------->>");
-//		}
-//		return response;
-//	}
-	
 	@Override
 	public ConsultarPersonaResponse consultarPersona(ConsultarPersonaRequest request) {
 		
@@ -143,9 +91,9 @@ public class SpringTypeBDServiceImp implements SpringTypeBDService {
 		response.getParametrosAuditResponse().setIdTransaccion(request.getParametrosAuditRequest().getIdTransaccion());
 		try{
 			ListaPersonaType personas = new ListaPersonaType();
-			PersonaBean[] personasList = testDBDao.consultarPersonasType(cadenaTrazabilidad);
+			List<PersonaBean> personasList = testDBDao.consultarPersonas(cadenaTrazabilidad);
 			
-			if(null != personasList && personasList.length>0){
+			if(null != personasList && personasList.size()>0){
 				for(PersonaBean personaBean: personasList){
 					Persona persona = new Persona();
 					persona.setApellido(personaBean.getApellido());
@@ -182,5 +130,58 @@ public class SpringTypeBDServiceImp implements SpringTypeBDService {
 		}
 		return response;
 	}
+	
+//	@Override
+//	public ConsultarPersonaResponse consultarPersona(ConsultarPersonaRequest request) {
+//		
+//		String cadenaTrazabilidad = "[consultarPersona]";
+//		long timeStart = System.currentTimeMillis();
+//		logger.info(cadenaTrazabilidad + "<<---------------- Inicio metodo consultarPersona ---------------->>");
+//		logger.info(cadenaTrazabilidad + "Input Servicio:\n" + JAXBUtil.anyObjectToXmlText(request));
+//		
+//		ConsultarPersonaResponse response = new ConsultarPersonaResponse();
+//		response.setParametrosAuditResponse(new ParametrosAuditResponseType());			
+//		response.getParametrosAuditResponse().setIdTransaccion(request.getParametrosAuditRequest().getIdTransaccion());
+//		try{
+//			ListaPersonaType personas = new ListaPersonaType();
+//			PersonaBean[] personasList = testDBDao.consultarPersonasType(cadenaTrazabilidad);
+//			
+//			if(null != personasList && personasList.length>0){
+//				for(PersonaBean personaBean: personasList){
+//					Persona persona = new Persona();
+//					persona.setApellido(personaBean.getApellido());
+//					persona.setEmail(personaBean.getEmail());
+//					persona.setEstadoCivil(personaBean.getEstadoCivil());
+//					persona.setFechaNacimiento(personaBean.getFechaNac().toString());
+//					persona.setIdpersona(personaBean.getIdpersona()+"");
+//					persona.setNombre(personaBean.getNombre());
+//					persona.setSexo(personaBean.getSexo());
+//					persona.setTelefono(personaBean.getTelefono());
+//					
+//					personas.getPersona().add(persona);
+//				}
+//				
+//				response.setListaPersona(personas);	
+//				response.getParametrosAuditResponse().setCodigoRespuesta("0");
+//				response.getParametrosAuditResponse().setMensajeRespuesta("Operación exitosa");
+//				response.setFechaOperacion(new Date().toString());
+//			}else{				
+//				response.getParametrosAuditResponse().setCodigoRespuesta("1");
+//				response.getParametrosAuditResponse().setMensajeRespuesta("No hay personas en la BD");
+//				response.setFechaOperacion(new Date().toString());										
+//			}
+//					
+//			
+//		}catch(Exception e){
+//			logger.error(cadenaTrazabilidad + "Error: " + e.getMessage(), e);
+//		}catch(Throwable e){
+//			logger.error(cadenaTrazabilidad + "Error: " + e.getMessage(), e);
+//		}finally{
+//			logger.info(cadenaTrazabilidad + "Output Servicio:\n" + JAXBUtil.anyObjectToXmlText(response));
+//			logger.info(cadenaTrazabilidad + "Tiempo total transcurrido(ms): " + (System.currentTimeMillis() - timeStart));
+//			logger.info(cadenaTrazabilidad + "<<---------------- Fin metodo consultarPersona ---------------->>");
+//		}
+//		return response;
+//	}
 
 }
